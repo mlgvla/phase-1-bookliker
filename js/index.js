@@ -96,7 +96,7 @@ function handleLikeBtn(bookId) {
 }
 
 function addUserToList(book) {
-  book.users.push(currentUser) //call updatedBook
+  book.users.push(currentUser)
   updateDBUsersList(book)
 }
 
@@ -104,17 +104,6 @@ function deleteUserFromList(book) {
   let updatedUsers = book.users.filter(user => user.id !== currentUser.id)
   book.users = updatedUsers
   updateDBUsersList(book)
-}
-
-function renderBookUsersList(book) {
-  let usersUl = document.getElementById("book_users")
-  usersUl.innerHTML = ""
-
-  book.users.forEach(user => {
-    const li = document.createElement("li")
-    li.innerHTML = user.username
-    usersUl.appendChild(li)
-  })
 }
 
 function updateDBUsersList(book) {
@@ -130,4 +119,15 @@ function updateDBUsersList(book) {
   })
     .then(r => r.json())
     .then(data => renderBookUsersList(data))
+}
+
+function renderBookUsersList(book) {
+  let usersUl = document.getElementById("book_users")
+  usersUl.innerHTML = ""
+
+  book.users.forEach(user => {
+    const li = document.createElement("li")
+    li.innerHTML = user.username
+    usersUl.appendChild(li)
+  })
 }
